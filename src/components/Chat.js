@@ -17,9 +17,13 @@ function Chat() {
   const firestore = useContext(FireStoreContext);
 
   const messageRef = firestore.collection("messages");
-  const query = messageRef.where("semail", "array-contains-any", [user?.email || ""]).limit(100);
+  const query = messageRef.where("semail", "in", [[user?.email || "", send].sort()]).limit(100);
   const messages = useCollectionData(query, {idField: "id"});
-  let orderedMessages = messages[0]?.sort((a,b)=>b.time-a.time);
+  let orderedMessages = messages[0]?.sort((a,b)=>{
+    if(!b.time) return 1;
+    if(!a.time) return -1;
+    return b.time-a.time;
+  });
 
   const chatsRef = firestore.collection("messages");
   const chatQuery = chatsRef.where("semail", "array-contains-any", [user?.email || ""]).limit(100);
@@ -48,7 +52,7 @@ function Chat() {
       uid,
       displayName,
       email,
-      semail: [send, user.email],
+      semail: [send, user.email].sort(),
     });
   }
 
