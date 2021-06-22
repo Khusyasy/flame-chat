@@ -1,19 +1,20 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
 
-import { FireStoreContext } from '../App';
 import { UserContext } from '../App';
+import { FireStoreContext } from '../App';
+import { SendContext } from '../App';
 
 import BottomBar from './BottomBar';
 import ChatRoom from './ChatRoom';
 import ChatLists from './ChatLists';
 
 function Chat() {
-  const [send, setSend] = useState("");
+  const [send, setSend] = useContext(SendContext);
 
-  const firestore = useContext(FireStoreContext);
   const user = useContext(UserContext);
+  const firestore = useContext(FireStoreContext);
 
   const messageRef = firestore.collection("messages");
   const query = messageRef.where("semail", "array-contains-any", [user?.email || ""]).limit(100);

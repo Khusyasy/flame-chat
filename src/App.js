@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { useState, createContext } from 'react';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -11,6 +11,7 @@ import Chat from './components/Chat';
 
 export const UserContext = createContext({});
 export const FireStoreContext = createContext({});
+export const SendContext = createContext([]);
 
 firebase.initializeApp({
   apiKey: "AIzaSyAY3zWrxmykgEeg7xgaktLQaPVnajtH-ao",
@@ -27,6 +28,7 @@ const firestore = firebase.firestore();
 
 function App() {
   const [user] = useAuthState(auth);
+  const [send, setSend] = useState("");
 
   function SignInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -42,6 +44,7 @@ function App() {
   return (
     <UserContext.Provider value={user}>
     <FireStoreContext.Provider value={firestore}>
+    <SendContext.Provider value={[send, setSend]}>
       <div className="App">
         <TopBar
           SignInWithGoogle={SignInWithGoogle}
@@ -49,6 +52,7 @@ function App() {
         />
         <Chat />
       </div>
+    </SendContext.Provider>
     </FireStoreContext.Provider>
     </UserContext.Provider>
   );
