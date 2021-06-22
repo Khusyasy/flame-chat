@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../App";
 import { Navbar, Container, Button, Form } from "react-bootstrap";
 
-function BottomBar({ user, sendMessage }) {
+function BottomBar({ sendMessage }) {
   const [input, setInput] = useState("");
+  const user = useContext(UserContext);
 
   function handleSend() {
     sendMessage(input);

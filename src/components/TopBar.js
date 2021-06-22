@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { UserContext } from "../App";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
-function TopBar({ user, SignInWithGoogle, SignOut }) {
+function TopBar({ SignInWithGoogle, SignOut }) {
+  const user = useContext(UserContext);
+  
   return (
   <Navbar bg="dark" variant="dark" expand="lg" fixed="top" style={styles.navbar} className="shadow-lg">
     <Container>

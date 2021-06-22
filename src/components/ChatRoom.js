@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import { UserContext } from "../App";
 import { Container } from "react-bootstrap";
 import ChatBubble from "./ChatBubble";
 
-function ChatRoom({ user, messages }) {
+function ChatRoom({ messages }) {
+  const user = useContext(UserContext);
+
   return (
   <Container fluid className="bg-secondary" style={styles.main}>
     {user ? messages ? messages.map((msg)=>(

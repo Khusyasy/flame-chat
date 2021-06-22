@@ -1,3 +1,5 @@
+import { createContext } from 'react';
+
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -8,6 +10,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import ChatRoom from './components/ChatRoom';
+
+export const UserContext = createContext({});
 
 firebase.initializeApp({
   apiKey: "AIzaSyAY3zWrxmykgEeg7xgaktLQaPVnajtH-ao",
@@ -52,15 +56,16 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <TopBar
-        user={user}
-        SignInWithGoogle={SignInWithGoogle}
-        SignOut={SignOut}
-      />
-      <ChatRoom user={user} messages={messages[0]} />
-      <BottomBar user={user} sendMessage={sendMessage} />
-    </div>
+    <UserContext.Provider value={user}>
+      <div className="App">
+        <TopBar
+          SignInWithGoogle={SignInWithGoogle}
+          SignOut={SignOut}
+        />
+        <ChatRoom messages={messages[0]} />
+        <BottomBar sendMessage={sendMessage} />
+      </div>
+    </UserContext.Provider>
   );
 }
 
