@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
+import { SendContext } from '../App';
 import { Navbar, Container, Button, Form } from "react-bootstrap";
 
 function BottomBar({ handleSend }) {
   const [input, setInput] = useState("");
   const user = useContext(UserContext);
+  const [send,] = useContext(SendContext);
 
   function buttonSend() {
     handleSend(input);
@@ -24,7 +26,7 @@ function BottomBar({ handleSend }) {
       {user && <>
         <Form.Control
           type="text"
-          placeholder="Enter Message..."
+          placeholder={ send ? "Enter Message..." : "Enter Email Address..." }
           className="w-75"
           value={input}
           onChange={(e)=>setInput(e.target.value)}
@@ -36,7 +38,7 @@ function BottomBar({ handleSend }) {
           className="w-25"
           onClick={buttonSend}
         >
-        Send
+        { send ? "Send" : "Start Chat"}
         </Button>
       </>}
     </Container>
