@@ -38,6 +38,7 @@ function App() {
   function SignOut() {
     if(auth.currentUser){
       auth.signOut();
+      setSend("");
     }
   }
 
