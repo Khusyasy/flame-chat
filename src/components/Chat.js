@@ -67,11 +67,9 @@ function Chat() {
   return (
     <>
     {
-    user ?
-      send ?
-        <ChatRoom messages={orderedMessages} />
-      : <ChatLists chats={groupedChats} setSend={setSend} />
-    : "LOADING"
+    send ?
+      <ChatRoom messages={orderedMessages} />
+    : <ChatLists chats={groupedChats} setSend={setSend} />
     }
     <BottomBar handleSend={handleSend} />
     </>

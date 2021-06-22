@@ -1,21 +1,27 @@
+import { useContext } from "react";
+import { UserContext } from "../App";
 import { Container } from "react-bootstrap";
 import ChatList from "./ChatList";
+import ChatAppBubble from "./ChatAppBubble";
 
 function ChatLists({ chats, setSend }) {
-
+  const user = useContext(UserContext);
+  
   return (
   <Container fluid className="bg-secondary" style={styles.main}>
     {
-    chats ?
-      chats.map((chat)=>(
-        <ChatList
-          key={chat.id}
-          displayName={chat.displayName}
-          email={chat.email}
-          setSend={setSend}
-        />
-      ))
-    : "Loading messages..."
+    user ?
+      chats ?
+        chats.map((chat)=>(
+          <ChatList
+            key={chat.id}
+            displayName={chat.displayName}
+            email={chat.email}
+            setSend={setSend}
+          />
+        ))
+      : <ChatAppBubble text="Loading chats..." />
+    : <ChatAppBubble text="Login to use chat" />
     }
   </Container>
   )
