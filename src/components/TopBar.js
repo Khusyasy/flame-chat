@@ -1,0 +1,16 @@
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+
+function TopBar() {
+  return (
+  <Navbar bg="dark" variant="dark" expand="lg">
+    <Container>
+      <Navbar.Brand href="/">FlameChat</Navbar.Brand>
+      <Nav>
+        <Button variant="secondary" onClick={()=>console.log("login")}>Login</Button>
+      </Nav>
+    </Container>
+  </Navbar>
+  )
+}
+
+export default TopBar;
