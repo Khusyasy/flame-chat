@@ -18,7 +18,7 @@ function BottomBar({ user, sendMessage }) {
 
   return (
   <Navbar bg="dark" variant="dark" expand="lg" fixed="bottom" style={styles.navbar}className="shadow-lg">
-    <Container fluid className="py-1">
+    <Container className="py-1">
       {user && <>
         <Form.Control
           type="text"
