@@ -37,8 +37,19 @@ function App() {
   }
 
   const messageRef = firestore.collection("messages");
-  const query = messageRef.orderBy("time").limit(100);
+  const query = messageRef.orderBy("time", "desc").limit(100);
   const messages = useCollectionData(query, {idField: "id"});
+
+  async function sendMessage(val) {
+    const { uid, displayName } = auth.currentUser;
+
+    await messageRef.add({
+      text: val,
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      displayName,
+    });
+  }
 
   return (
     <div className="App">
@@ -48,7 +59,7 @@ function App() {
         SignOut={SignOut}
       />
       <ChatRoom user={user} messages={messages[0]} />
-      <BottomBar user={user} />
+      <BottomBar user={user} sendMessage={sendMessage} />
     </div>
   );
 }
