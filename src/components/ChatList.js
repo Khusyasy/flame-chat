@@ -1,6 +1,6 @@
-function ChatList({ displayName, email }) {
+function ChatList({ displayName, email, setSend }) {
   return (
-    <div style={styles.main} className="bg-dark">
+    <div style={styles.main} className="bg-dark" onClick={()=>setSend(email)}>
       <h3 className="text-light">{ displayName } || { email }</h3>
     </div>
   );

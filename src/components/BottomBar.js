@@ -2,19 +2,19 @@ import { useState, useContext } from "react";
 import { UserContext } from "../App";
 import { Navbar, Container, Button, Form } from "react-bootstrap";
 
-function BottomBar({ sendMessage }) {
+function BottomBar({ handleSend }) {
   const [input, setInput] = useState("");
   const user = useContext(UserContext);
 
-  function handleSend() {
-    sendMessage(input);
+  function buttonSend() {
+    handleSend(input);
     setInput("");
   }
 
   function handleInputEnter(e) {
     if(e.keyCode === 13){
       e.preventDefault();
-      handleSend()
+      buttonSend()
     }
   }
 
@@ -34,7 +34,7 @@ function BottomBar({ sendMessage }) {
           variant="secondary"
           type="button"
           className="w-25"
-          onClick={handleSend}
+          onClick={buttonSend}
         >
         Send
         </Button>

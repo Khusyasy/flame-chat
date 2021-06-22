@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import ChatList from "./ChatList";
 
-function ChatLists({ chats }) {
+function ChatLists({ chats, setSend }) {
 
   return (
   <Container fluid className="bg-secondary" style={styles.main}>
@@ -12,6 +12,7 @@ function ChatLists({ chats }) {
           key={chat.id}
           displayName={chat.displayName}
           email={chat.email}
+          setSend={setSend}
         />
       ))
     : "Loading messages..."
