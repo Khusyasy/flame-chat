@@ -2,21 +2,28 @@ import { useContext } from "react";
 import { UserContext } from "../App";
 import { Container } from "react-bootstrap";
 import ChatBubble from "./ChatBubble";
+import ChatAppBubble from "./ChatAppBubble";
 
 function ChatRoom({ messages }) {
   const user = useContext(UserContext);
 
   return (
   <Container fluid className="bg-secondary" style={styles.main}>
-    {user ? messages ? messages.map((msg)=>(
-      <ChatBubble
-        key={msg.id}
-        text={msg.text}
-        sender={msg.uid === user.uid}
-        displayName={msg.displayName}
-        time={msg.time?.toDate()}
-      />
-    )) : <p className="text-light text-center">Loading messages...</p> : <h1 className="h-100 text-light">Login to use chat</h1>}
+    {
+    user ?
+      messages ?
+        messages.map((msg)=>(
+          <ChatBubble
+            key={msg.id}
+            text={msg.text}
+            sender={msg.uid === user.uid}
+            displayName={msg.displayName}
+            time={msg.time?.toDate()}
+          />
+        ))
+      : <ChatAppBubble text="Loading messages..." />
+    : <ChatAppBubble text="Login to use chat" />
+    }
   </Container>
   )
 }
