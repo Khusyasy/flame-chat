@@ -2,7 +2,7 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
 function TopBar() {
   return (
-  <Navbar bg="dark" variant="dark" expand="lg" fixed="top" style={styles.navbar}>
+  <Navbar bg="dark" variant="dark" expand="lg" fixed="top" style={styles.navbar} className="shadow-lg">
     <Container>
       <Navbar.Brand href="/">FlameChat</Navbar.Brand>
       <Nav>

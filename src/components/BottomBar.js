@@ -2,7 +2,7 @@ import { Navbar, Container, Button, Form } from "react-bootstrap";
 
 function BottomBar() {
   return (
-  <Navbar bg="dark" variant="dark" expand="lg" fixed="bottom" style={styles.navbar}>
+  <Navbar bg="dark" variant="dark" expand="lg" fixed="bottom" style={styles.navbar}className="shadow-lg">
     <Container fluid className="py-1">
       <Form.Control type="text" placeholder="Enter Message..." className="w-75" />
       <Button variant="secondary" type="submit" className="w-25" onClick={()=>console.log("send")}>Send</Button>
