@@ -8,9 +8,9 @@ function ChatBubble({ text, sender, displayName, time }) {
           { displayName }
         </div>}
         { text }
-        <span className="text-muted small">
+        <div className="text-muted text-right small">
           { time  && (" " + new Date(time).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})) }
-        </span>
+        </div>
       </Alert>
     </div>
   );
@@ -32,12 +32,15 @@ const styles = {
   bubble: {
     margin: 0,
     padding: "0.2rem 0.4rem",
+    wordBreak: "break-all",
+    maxWidth: "90%",
   },
   name: {
     margin: 0,
+    marginBottom: "0.2em",
     padding: 0,
     fontWeight: "700",
-  }
+  },
 }
 
 export default ChatBubble;
