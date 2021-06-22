@@ -19,7 +19,11 @@ function ChatRoom({ user, messages }) {
 
 const styles = {
   main: {
-    height: "calc(100vh - 8rem)",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
     marginTop: "4rem",
     marginBottom: "4rem",
     padding: "1rem",
