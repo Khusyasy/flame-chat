@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 import ChatBubble from "./ChatBubble";
 
-function ChatRoom() {
+function ChatRoom({ user }) {
   const [messages, setMessages] = useState([
     { id: 1, text: "hello", sender: true },
     { id: 2, text: "HIASDASD", sender: false },
@@ -21,9 +21,9 @@ function ChatRoom() {
 
   return (
   <Container fluid className="bg-secondary" style={styles.main}>
-    {messages.map((m)=>(
+    {user ? messages.map((m)=>(
       <ChatBubble key={m.id} text={m.text} sender={m.sender} />
-    ))}
+    )) : <h1 className="h-100 text-light">Login to use chat</h1>}
   </Container>
   )
 }
