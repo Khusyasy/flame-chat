@@ -10,6 +10,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import TopBar from './components/TopBar';
 import BottomBar from './components/BottomBar';
 import ChatRoom from './components/ChatRoom';
+import ChatLists from './components/ChatLists';
 
 export const UserContext = createContext({});
 
@@ -44,14 +45,19 @@ function App() {
   const query = messageRef.orderBy("time", "desc").limit(100);
   const messages = useCollectionData(query, {idField: "id"});
 
+  const chatQuery = messageRef.where("semail", "==", "khusyasy@gmail.com").limit(100);
+  const chats = useCollectionData(chatQuery, {idField: "id"});
+
   async function sendMessage(val) {
-    const { uid, displayName } = auth.currentUser;
+    const { uid, email, displayName } = auth.currentUser;
 
     await messageRef.add({
       text: val,
       time: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       displayName,
+      email,
+      semail: "khusyasy@gmail.com",
     });
   }
 
@@ -62,7 +68,8 @@ function App() {
           SignInWithGoogle={SignInWithGoogle}
           SignOut={SignOut}
         />
-        <ChatRoom messages={messages[0]} />
+        {/* <ChatRoom messages={messages[0]} /> */}
+        <ChatLists chats={chats[0]} />
         <BottomBar sendMessage={sendMessage} />
       </div>
     </UserContext.Provider>
