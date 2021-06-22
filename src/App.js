@@ -36,6 +36,10 @@ function App() {
     }
   }
 
+  const messageRef = firestore.collection("messages");
+  const query = messageRef.orderBy("time").limit(100);
+  const messages = useCollectionData(query, {idField: "id"});
+
   return (
     <div className="App">
       <TopBar
@@ -43,7 +47,7 @@ function App() {
         SignInWithGoogle={SignInWithGoogle}
         SignOut={SignOut}
       />
-      <ChatRoom user={user} />
+      <ChatRoom user={user} messages={messages[0]} />
       <BottomBar user={user} />
     </div>
   );
