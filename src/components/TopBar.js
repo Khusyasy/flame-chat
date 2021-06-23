@@ -15,18 +15,20 @@ function TopBar({ SignInWithGoogle, SignOut }) {
       send ?
         <>
         <BackToLists />
-        <Navbar.Brand>{send}</Navbar.Brand>
+        <div className="text-light ml-2 mr-auto">{send}</div>
         </>
       :
-      <Navbar.Brand>FlameChat</Navbar.Brand>
-      }
+      <>
+      <Navbar.Brand>🔥 FlameChat</Navbar.Brand>
       <Nav>
         {user ? (
-          <Button variant="danger" onClick={SignOut}>Logout</Button>
+          <Button variant="outline-light" onClick={SignOut}>Logout</Button>
         ) : (
           <Button variant="secondary" onClick={SignInWithGoogle}>Login</Button>
         )}
       </Nav>
+      </>
+      }
     </Container>
   </Navbar>
   )
