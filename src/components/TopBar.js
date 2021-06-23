@@ -9,13 +9,13 @@ function TopBar({ SignInWithGoogle, SignOut }) {
   const [send,] = useContext(SendContext);
   
   return (
-  <Navbar bg="dark" variant="dark" expand="lg" fixed="top" style={styles.navbar} className="shadow-lg">
+  <Navbar bg="dark" variant="dark" fixed="top" style={styles.navbar} className="shadow-lg">
     <Container>
       {
       send ?
         <>
         <BackToLists />
-        <div className="text-light ml-2 mr-auto">{send}</div>
+        <div className="text-light text-truncate ml-2 mr-auto">{send}</div>
         </>
       :
       <>

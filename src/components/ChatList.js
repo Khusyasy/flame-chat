@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 function ChatList({ email, setSend }) {
   return (
     <Button style={styles.main} variant="dark" onClick={()=>setSend(email)}>
-      <h3 className="text-light">{ email }</h3>
+      <h3 className="text-light text-truncate">{ email }</h3>
     </Button>
   );
 }
