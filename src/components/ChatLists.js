@@ -6,6 +6,10 @@ import ChatAppBubble from "./ChatAppBubble";
 
 function ChatLists({ chats, setSend }) {
   const user = useContext(UserContext);
+
+  function getSenderEmail(chat) {
+    return chat.email === user.email ? chat.semail.filter((e,i,a)=>i!==a.indexOf(user.email))[0] : chat.email;
+  }
   
   return (
   <Container fluid className="bg-secondary" style={styles.main}>
@@ -16,7 +20,7 @@ function ChatLists({ chats, setSend }) {
           chats.map((chat)=>(
             <ChatList
               key={chat.id}
-              email={chat.email}
+              email={getSenderEmail(chat)}
               setSend={setSend}
             />
           ))

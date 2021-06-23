@@ -32,20 +32,30 @@ function Chat() {
   const chatsRef = firestore.collection("messages");
   const chatQuery = chatsRef.where("semail", "array-contains-any", [user?.email || ""]).limit(100);
   const chats = useCollectionData(chatQuery, {idField: "id"});
+
+  function getSenderEmail(semail) {
+    return semail.filter((e,i,a)=>i!==a.indexOf(user.email))[0];
+  }
+
   let groupedChats = chats[0];
   if(groupedChats){
     let chatSet = new Set();
     groupedChats = groupedChats.filter(e => {
-      if(chatSet.has(e.email)){
+      if(e.email === user?.email){
+        let sender = getSenderEmail(e.semail);
+        if(!chatSet.has(sender)){
+          chatSet.add(sender);
+          return true;
+        }
         return false;
-      }else if(e.email === user?.email){
-        return false;
-      }else{
+      }
+      if(!chatSet.has(e.email)){
         chatSet.add(e.email);
         return true;
       };
+      return false;
     });
-    groupedChats = sortTimeNewest(groupedChats);
+    console.log(groupedChats);
   }
 
   async function sendMessage(val) {
