@@ -10,6 +10,14 @@ import BottomBar from './BottomBar';
 import ChatRoom from './ChatRoom';
 import ChatLists from './ChatLists';
 
+function sortTimeNewest(arr) {
+  return arr?.sort((a,b)=>{
+    if(!b.time) return 1;
+    if(!a.time) return -1;
+    return b.time-a.time;
+  });
+}
+
 function Chat() {
   const [send, setSend] = useContext(SendContext);
 
@@ -19,11 +27,7 @@ function Chat() {
   const messageRef = firestore.collection("messages");
   const query = messageRef.where("semail", "in", [[user?.email || "", send].sort()]).limit(100);
   const messages = useCollectionData(query, {idField: "id"});
-  let orderedMessages = messages[0]?.sort((a,b)=>{
-    if(!b.time) return 1;
-    if(!a.time) return -1;
-    return b.time-a.time;
-  });
+  let orderedMessages = sortTimeNewest(messages[0]);
 
   const chatsRef = firestore.collection("messages");
   const chatQuery = chatsRef.where("semail", "array-contains-any", [user?.email || ""]).limit(100);
@@ -41,6 +45,7 @@ function Chat() {
         return true;
       };
     });
+    groupedChats = sortTimeNewest(groupedChats);
   }
 
   async function sendMessage(val) {
