@@ -38,6 +38,7 @@ function Chat() {
   }
 
   let groupedChats = chats[0];
+  groupedChats = sortTimeNewest(groupedChats);
   if(groupedChats){
     let chatSet = new Set();
     groupedChats = groupedChats.filter(e => {
@@ -55,7 +56,6 @@ function Chat() {
       };
       return false;
     });
-    console.log(groupedChats);
   }
 
   async function sendMessage(val) {
