@@ -35,6 +35,7 @@ function TopBar({ SignInWithGoogle, SignOut }) {
 const styles = {
   navbar: {
     height: "4rem",
+    position: "absolute",
   }
 }
 

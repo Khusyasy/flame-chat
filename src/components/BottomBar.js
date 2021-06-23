@@ -49,6 +49,7 @@ function BottomBar({ handleSend }) {
 const styles = {
   navbar: {
     height: "4rem",
+    position: "absolute",
   }
 }
 

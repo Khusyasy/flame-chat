@@ -46,7 +46,7 @@ function App() {
     <UserContext.Provider value={user}>
     <FireStoreContext.Provider value={firestore}>
     <SendContext.Provider value={[send, setSend]}>
-      <div className="App">
+      <div className="App" style={styles.app}>
         <TopBar
           SignInWithGoogle={SignInWithGoogle}
           SignOut={SignOut}
@@ -57,6 +57,16 @@ function App() {
     </FireStoreContext.Provider>
     </UserContext.Provider>
   );
+}
+
+const styles = {
+  app: {
+    height: "100vh",
+    maxWidth: "70ch",
+    margin: "auto",
+    position: "relative",
+    overflow: "hidden",
+  }
 }
 
 export default App;
