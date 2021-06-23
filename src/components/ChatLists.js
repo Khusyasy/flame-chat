@@ -12,14 +12,15 @@ function ChatLists({ chats, setSend }) {
     {
     user ?
       chats ?
-        chats.map((chat)=>(
-          <ChatList
-            key={chat.id}
-            displayName={chat.displayName}
-            email={chat.email}
-            setSend={setSend}
-          />
-        ))
+        chats.length > 1 ?
+          chats.map((chat)=>(
+            <ChatList
+              key={chat.id}
+              email={chat.email}
+              setSend={setSend}
+            />
+          ))
+        : <ChatAppBubble text="Enter email address below to start a new chat" />
       : <ChatAppBubble text="Loading chats..." />
     : <ChatAppBubble text="Login to use chat" />
     }
@@ -36,9 +37,9 @@ const styles = {
     right: 0,
     marginTop: "4rem",
     marginBottom: "4rem",
-    padding: "1rem",
+    padding: "0.5rem",
     display: "flex",
-    gap: "1rem",
+    gap: "0.5rem",
     flexDirection: "column",
     justifyContent: "flex-start",
     overflowY: "scroll",
