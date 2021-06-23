@@ -12,7 +12,7 @@ function ChatLists({ chats, setSend }) {
     {
     user ?
       chats ?
-        chats.length > 1 ?
+        chats.length > 0 ?
           chats.map((chat)=>(
             <ChatList
               key={chat.id}
